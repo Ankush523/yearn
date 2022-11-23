@@ -1,22 +1,46 @@
-import logo from './logo.svg';
-import { Yearn } from "@yfi/sdk";
-import { JsonRpcProvider } from "@ethersproject/providers";
+import { BrowserRouter as Router, Route, Link, Routes } from "react-router-dom";
+import Home from "./Home";
+import Balance from "./pages/Balance";
+import Deposit from "./pages/Deposit";
+import Withdraw from "./pages/Withdraw";
+import Vaults from "./pages/Vaults";
 
-import './App.css';
 
-function App() {
-const chainId = 137;
-
-const rpcUrl = "https://polygon-mainnet.g.alchemy.com/v2/UaBLfxPk-bv5k23r4YMJ_vEG-4PZn5ql";
-
-const yearn = new Yearn(chainId, {
-  provider: new JsonRpcProvider(rpcUrl)
-});
+export default function App() {
+  const navLinks = [
+    { to: "/", name: "Home", className: "header" },
+    { to: "/balance", name: "Balances" },
+    { to: "/deposit", name: "Deposit" },
+    { to: "/withdraw", name: "Withdraw" },
+    { to: "/vaults", name: "Vaults" },
+  ];
   return (
-    <div className="App">
-      
-    </div>
+    <Router>
+      <div className="App">
+        <div className="sidenav">
+          <ul>
+            {navLinks.map((link) => {
+              return (
+                <li key={link.name} className={link.className ?? null}>
+                  <Link to={link.to}>{link.name}</Link>
+                </li>
+              );
+            })}
+          </ul>
+        </div>
+
+        <div className="content">
+          <h1>Yearn SDK Integration Examples</h1>
+
+          <Routes>
+            <Route exact path="/" element={<Home />} />
+            <Route path="/balance" element={<Balance />} />
+            <Route path="/deposit" element={<Deposit />} />
+            <Route path="/withdraw" element={<Withdraw />} />
+            <Route path="/vaults" element={<Vaults />} />
+          </Routes>
+        </div>
+      </div>
+    </Router>
   );
 }
-
-export default App;
