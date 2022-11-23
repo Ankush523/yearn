@@ -1,23 +1,20 @@
 import logo from './logo.svg';
+import { Yearn } from "@yfi/sdk";
+import { JsonRpcProvider } from "@ethersproject/providers";
+
 import './App.css';
 
 function App() {
+const chainId = 137;
+
+const rpcUrl = "https://polygon-mainnet.g.alchemy.com/v2/UaBLfxPk-bv5k23r4YMJ_vEG-4PZn5ql";
+
+const yearn = new Yearn(chainId, {
+  provider: new JsonRpcProvider(rpcUrl)
+});
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      
     </div>
   );
 }
